@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieList | Filmes para assistir</title>
+  <meta name="description" content="Sua lista de filmes: marque como assistido, dê nota, comente e filtre por gênero.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__in">
+      <p class="marca">MOVIE<span>LIST</span></p>
+      <dl class="numeros">
+        <div><dt>na lista</dt><dd id="n-total">0</dd></div>
+        <div><dt>assistidos</dt><dd id="n-vistos">0</dd></div>
+        <div><dt>nota média</dt><dd id="n-media">—</dd></div>
+      </dl>
+      <button class="btn" id="novo">+ Adicionar filme</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <div class="filtros">
+      <div class="abas" role="group" aria-label="Status">
+        <button data-status="todos" aria-pressed="true">Todos</button>
+        <button data-status="quero" aria-pressed="false">Para assistir</button>
+        <button data-status="visto" aria-pressed="false">Assistidos</button>
+      </div>
+      <div class="filtros__dir">
+        <label class="sr" for="busca">Buscar filme</label>
+        <input id="busca" type="search" placeholder="Buscar título, diretor…">
+        <label class="sr" for="ordem">Ordenar</label>
+        <select id="ordem">
+          <option value="recentes">Adicionados por último</option>
+          <option value="nota">Maior nota</option>
+          <option value="ano">Mais novos</option>
+          <option value="titulo">Título (A–Z)</option>
+        </select>
+      </div>
+    </div>
+    <div class="generos" id="generos" role="group" aria-label="Gêneros"></div>
+    <p class="resumo" id="resumo" aria-live="polite"></p>
+    <ul class="filmes" id="filmes"></ul>
+  </main>
+
+  <dialog id="dlg" aria-labelledby="dlg-titulo">
+    <form method="dialog" id="form">
+      <div class="form__cartaz" id="f-cartaz" aria-hidden="true"></div>
+      <div class="form__campos">
+        <h2 id="dlg-titulo">Adicionar filme</h2>
+        <label>Título<input id="f-titulo" required maxlength="80"></label>
+        <div class="linha">
+          <label>Ano<input id="f-ano" type="number" min="1888" max="2100"></label>
+          <label>Duração (min)<input id="f-dur" type="number" min="1" max="600"></label>
+        </div>
+        <label>Diretor(a)<input id="f-dir" maxlength="60"></label>
+        <fieldset><legend>Gêneros</legend><div class="chips" id="f-generos"></div></fieldset>
+        <label class="check"><input type="checkbox" id="f-visto"> Já assisti</label>
+        <fieldset class="so-visto"><legend>Sua nota</legend><div class="estrelas" id="f-nota" role="radiogroup" aria-label="Nota de 1 a 5"></div></fieldset>
+        <label class="so-visto">Comentário<textarea id="f-coment" rows="3" maxlength="500" placeholder="O que achou?"></textarea></label>
+        <div class="acoes">
+          <button type="button" class="link perigo" id="f-excluir" hidden>Excluir</button>
+          <button value="cancelar" formnovalidate class="btn sec">Cancelar</button>
+          <button value="salvar" class="btn">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
